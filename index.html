@@ -3,155 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro OS</title>
+    <title>Retro Header Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
     <style>
-        /* General Reset */
-        * {
-            box-sizing: border-box;
-        }
-
+        /* --- Base Website Styles --- */
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
-            font-family: "MS Sans Serif", "Tahoma", sans-serif;
-            background-color: #008080; /* Classic Teal Desktop */
-            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Dark background for the rest of the site */
+            color: #e0e0e0;
         }
 
-        /* Window Styling */
-        .window {
-            width: 400px;
-            background: #c0c0c0;
-            border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff; /* Bevel effect */
-            box-shadow: 1px 1px 0 0 #000;
-            position: absolute;
-            top: 50px;
-            left: 50px;
+        /* --- Retro Header Styles --- */
+        .retro-header {
+            background: linear-gradient(180deg, #0b0220 0%, #2b0b3f 100%); /* Deep synthwave purple */
+            border-bottom: 4px solid #0ff; /* Neon cyan bottom border */
+            box-shadow: 0 0 15px #0ff; /* Glowing border effect */
+            padding: 30px 20px;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive; /* Applies the 8-bit font */
         }
 
-        .title-bar {
-            background: linear-gradient(90deg, #000080, #1084d0);
-            padding: 3px 5px;
+        .neon-title {
+            margin: 0 0 25px 0;
+            font-size: 2.5rem;
+            color: #ff00ff; /* Neon pink text */
+            letter-spacing: 2px;
+            /* Creating the neon glow effect */
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #ff00ff,
+                0 0 40px #ff00ff,
+                0 0 80px #ff00ff;
+        }
+
+        .retro-nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 13px;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .title-bar-controls button {
-            width: 16px;
-            height: 14px;
-            background: #c0c0c0;
-            border: 1px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            cursor: pointer;
-            margin-left: 2px;
+        .retro-nav a {
+            color: #0ff; /* Neon cyan links */
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border: 2px solid #0ff;
+            padding: 12px 20px;
+            background: rgba(0, 255, 255, 0.05);
+            transition: all 0.3s ease-in-out;
         }
 
-        .window-body {
-            padding: 15px;
-            font-size: 14px;
+        /* The hover effect makes the buttons "light up" */
+        .retro-nav a:hover {
+            background-color: #0ff;
+            color: #000;
+            box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+            transform: scale(1.05);
         }
 
-        /* Taskbar Styling */
-        .taskbar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 30px;
-            background: #c0c0c0;
-            border-top: 2px solid #ffffff;
-            display: flex;
-            align-items: center;
-            padding: 2px;
-            z-index: 100;
+        /* --- Main Content Area --- */
+        .content {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+            line-height: 1.6;
         }
 
-        .start-button {
-            height: 22px;
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            background: #c0c0c0;
-            padding: 0 5px;
-            gap: 5px;
-        }
-
-        .start-button:active {
-            border-color: #808080 #ffffff #ffffff #808080;
-        }
-
-        .active-tasks {
-            flex-grow: 1;
-            margin-left: 10px;
-        }
-
-        .task-item {
-            width: 150px;
-            height: 22px;
-            background: #c0c0c0;
-            border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            font-size: 12px;
-            padding-left: 5px;
-            line-height: 20px;
-        }
-
-        .system-tray {
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-            padding: 0 10px;
-            font-size: 12px;
-            height: 22px;
-            line-height: 20px;
+        .content h2 {
+            color: #ff00ff;
         }
     </style>
 </head>
 <body>
 
-    <div class="desktop">
-        <div class="window">
-            <div class="title-bar">
-                <div class="title-bar-text">README.txt - Notepad</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Minimize"></button>
-                    <button aria-label="Maximize"></button>
-                    <button aria-label="Close"></button>
-                </div>
-            </div>
-            <div class="window-body">
-                <h3>Welcome to 1995</h3>
-                <p>This interface is built with pure HTML and CSS. No time machine required.</p>
-                <hr>
-                <p>To-do list:</p>
-                <ul>
-                    <li>Install Netscape Navigator</li>
-                    <li>Listen to some MIDI files</li>
-                    <li>Wait 10 minutes for a JPEG to load</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <header class="retro-header">
+        <h1 class="neon-title">CYBER_SPACE</h1>
+        <nav class="retro-nav">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#arcade">Arcade</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-    <div class="taskbar">
-        <button class="start-button">
-            <img src="https://img.icons8.com/color/16/000000/windows-95.png" alt="win">
-            <span>Start</span>
-        </button>
-        <div class="taskbar-divider"></div>
-        <div class="active-tasks">
-            <div class="task-item">Notepad</div>
-        </div>
-        <div class="system-tray">
-            10:43 AM
-        </div>
-    </div>
+    <main class="content">
+        <h2>Welcome to the Future (of the Past)</h2>
+        <p>This is where the rest of your standard website content goes. The header stays safely at the top, providing that distinct 80s arcade vibe, while your main content area is clean and highly readable.</p>
+        <p>You can use standard fonts down here so your users don't have to read long paragraphs in an 8-bit pixel font, which can get tiring on the eyes!</p>
+    </main>
 
 </body>
 </html>
