@@ -3,48 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro OS</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <title>Retro Spectrum Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Base & Reset --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <div class="desktop">
-        <div class="window">
-            <div class="title-bar">
-                <div class="title-bar-text">README.txt - Notepad</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Minimize"></button>
-                    <button aria-label="Maximize"></button>
-                    <button aria-label="Close"></button>
-                </div>
-            </div>
-            <div class="window-body">
-                <h3>Welcome to 1995</h3>
-                <p>This interface is built with pure HTML and CSS. No time machine required.</p>
-                <hr>
-                <p>To-do list:</p>
-                <ul>
-                    <li>Install Netscape Navigator</li>
-                    <li>Listen to some MIDI files</li>
-                    <li>Wait 10 minutes for a JPEG to load</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #040111; /* Deepest blue-black */
+            color: #d1d1f0;
+            overflow-x: hidden;
+        }
 
-    <div class="taskbar">
-        <button class="start-button">
-            <img src="https://img.icons8.com/color/16/000000/windows-95.png" alt="win">
-            <span>Start</span>
-        </button>
-        <div class="taskbar-divider"></div>
-        <div class="active-tasks">
-            <div class="task-item">Notepad</div>
-        </div>
-        <div class="system-tray">
-            10:43 AM
-        </div>
-    </div>
+        /* --- Scanline Overlay Effect (CRT style) --- */
+        /* This applies a global "monitor" texture to the entire site */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 999; /* Above everything */
+        }
 
-</body>
-</html>
+        /* --- Header: Retrowave Sunset/Grid --- */
+        .retro-header {
+            font-family: 'Press Start 2P', cursive;
+            position: relative;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            border-bottom: 5px solid;
+            /* Multi-color border */
+            border-image: linear-gradient(90deg, #ff00ff, #00ffff, #ffea00, #ff00ff) 1;
+            
+            /* Vaporwave/Synthwave Sunset Gradient Background */
+            background: linear-gradient(180deg, 
+                #000000 0%, 
+                #1a063d 40%, 
+                #a800ff 70%, 
+                #ff0055 85%, 
+                #ffea00 100%
+            );
+        }
+
+        /* Adding a perspective grid to the background */
+        .retro-header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image:
+                linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(255, 0, 255, 0.1) 25%, rgba(255, 0, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.1) 75%, rgba(255, 0, 255, 0.1) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            transform: perspective(100px) rotateX(60deg);
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .title-container {
+            position: relative;
+            z-index: 2; /* above grid */
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .neon-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            
+            /* Multicolor Neon Text Glow */
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #ff00ff,
+                0 0 20px #ff00ff,
+                0 0 30px #00ffff,
+                0 0 40px #ffea00;
+            
+            animation: flicker 4s infinite alternate;
+        }
+
+        .pixel-logo {
+            width: 32px;
+            height: 32px;
+            background-color: #ffea00;
+            box-shadow: 0 0 10px #ffea00;
+            position: relative;
+        }
+        /* Pixel art 'space invader' using pseudo-elements */
+        .pixel-logo::before, .pixel-logo::after {
+            content: '';
+            position: absolute;
+            background-color: inherit;
+        }
+        .pixel-logo::before {
+            width: 8px; height: 8px; top: 8px; left: -8px;
+            box-shadow: 40px 0 #ffea00, 24px 8px #ffea00, 16px 8px #ffea00, 20px -8px #ffea00;
+        }
+
+        /* --- Navigation: Interactive Arcade Buttons --- */
+        .retro-nav {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .retro-nav a {
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 15px 25px;
+            color: #000;
+            font-weight: bold;
+            background: #c0c0c0; /* Gray base, old software feel */
+            border: 4px solid;
+            transition: all 0.2s ease-in-out;
+            
+            /* The 'recessed' look */
+            border-color: #ffffff #808080 #808080 #ffffff;
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        /* Interactive colors: Each button glows differently */
+        .retro-nav a:nth-child(1):hover { background: #00ffff; color: #000; border-color: #00cccc; box-shadow: 0 0 15px #00ffff;}
+        .retro-nav a:nth-child(2):hover { background: #ff00ff; color: #fff; border-color: #cc00cc; box-shadow: 0 0 15px #ff00ff;}
+        .retro-nav a:nth-child(3):hover { background: #ffea00; color: #000; border-color: #cccc00; box-shadow: 0 0 15px #ffea00;}
+        .retro-nav a:nth-child(4):hover { background: #33ff33; color: #000; border-color: #22cc22; box-shadow: 0 0 15px #33ff33;}
+
+        /* 'Pressed' effect */
+        .retro-nav a:active {
+            transform: translate(2px, 2px);
+            border-color: #808080 #ffffff #ffffff #808080;
+            box-shadow: 1px 1px 0 #000;
+        }
+
+        /* --- Content Area --- */
+        .content {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #ffea00;
+            font-family: 'Press Start 2
