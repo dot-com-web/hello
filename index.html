@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Shop - Minimalist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&family=Titan+One&display=swap" rel="stylesheet">
+    <title>Vivid & Minimal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Titan+One&display=swap" rel="stylesheet">
     <style>
         :root {
             --blue: #00a0d6;
@@ -12,10 +12,8 @@
             --cream: #fdf5b5;
             --pink: #fc8da1;
             --red: #e5362b;
-            --bg-grid: #fdf5b5;
         }
 
-        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
@@ -24,173 +22,155 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            /* Grid background inspired by image 2 */
-            background-color: var(--bg-grid);
-            background-image: radial-gradient(#ffe77e 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-color: var(--cream);
             color: var(--red);
-            padding: 40px 20px;
+            overflow-x: hidden;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        header h1 {
-            font-family: 'Titan One', cursive;
-            font-size: 3rem;
-            color: var(--pink);
-            text-shadow: 2px 2px var(--red);
-            margin-bottom: 10px;
-        }
-
-        /* Product Grid Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        /* Card Style - inspired by Image 1 */
-        .card {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(229, 54, 43, 0.1);
-            transition: transform 0.3s ease;
+        /* --- Navigation --- */
+        nav {
+            padding: 2rem;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
+        .logo {
+            font-family: 'Titan One', cursive;
+            font-size: 1.8rem;
+            color: var(--blue);
+            text-transform: lowercase;
         }
 
-        .card-image-area {
-            background: #fff;
-            padding: 20px;
-            height: 350px;
+        /* --- Hero Section --- */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            min-height: 80vh;
+            align-items: center;
+            padding: 0 5%;
+            gap: 2rem;
+        }
+
+        .hero-text h1 {
+            font-family: 'Titan One', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+            color: var(--red);
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            max-width: 500px;
+            color: var(--blue);
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        /* --- Floating Shapes (Minimal Style) --- */
+        .hero-visual {
+            position: relative;
+            height: 400px;
+            background: var(--pink);
+            border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 2px solid var(--cream);
+            box-shadow: 20px 20px 0px var(--yellow);
         }
 
-        /* Mockup design within the card */
-        .mock-content {
-            border: 2px solid #333;
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        .mock-title {
+        .big-char {
             font-family: 'Titan One', cursive;
-            font-size: 1.5rem;
-            color: var(--blue);
+            font-size: 15rem;
+            color: var(--cream);
         }
 
-        .card-info {
-            padding: 25px;
-            text-align: center;
-            background-color: #fff;
+        /* --- Feature Section (Bento Style) --- */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 5%;
         }
 
-        .card-info h2 {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--red);
-            margin-bottom: 8px;
+        .box {
+            padding: 40px;
+            border-radius: 30px;
+            transition: transform 0.3s ease;
         }
 
-        .price {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: var(--pink);
-            margin-bottom: 20px;
+        .box:hover {
+            transform: scale(1.02);
         }
 
-        /* Button Style - Image 2 colors */
-        .buy-btn {
-            display: block;
-            background-color: var(--pink);
+        .box-blue { background: var(--blue); color: white; }
+        .box-yellow { background: var(--yellow); color: var(--red); }
+        .box-pink { background: var(--pink); color: white; }
+
+        .box h3 {
+            font-family: 'Titan One', cursive;
+            margin-bottom: 10px;
+        }
+
+        /* --- Button --- */
+        .cta {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background-color: var(--red);
             color: white;
             text-decoration: none;
-            padding: 15px;
-            border-radius: 15px;
-            font-weight: 700;
-            transition: background 0.3s;
-            font-family: 'Outfit', sans-serif;
+            border-radius: 100px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        .buy-btn:hover {
-            background-color: var(--red);
+        .cta:hover {
+            background-color: var(--blue);
+            transform: translateY(-5px);
         }
 
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-text p { margin: 0 auto 2rem auto; }
+            .features { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>bonniehouse</h1>
-        <p style="font-weight: 500;">typography & design collection</p>
-    </header>
+    <nav>
+        <div class="logo">bold.mini</div>
+        <div style="font-weight: 800; color: var(--pink);">MENU</div>
+    </nav>
 
-    <div class="container">
-        <div class="card">
-            <div class="card-image-area">
-                <div class="mock-content">
-                    <div class="mock-title">Afterglow</div>
-                    <div style="font-size: 40px;">Aa</div>
-                    <p style="font-size: 12px; color: #666;">The quick brown fox jumps over the lazy dog.</p>
-                </div>
-            </div>
-            <div class="card-info">
-                <h2>Afterglow</h2>
-                <div class="price">$59.00</div>
-                <a href="#" class="buy-btn">Add to Cart</a>
-            </div>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Create <br>Simple.</h1>
+            <p>A minimalist playground built with high-impact colors and bold type.</p>
+            <a href="#" class="cta">Start Exploring</a>
         </div>
+        <div class="hero-visual">
+            <div class="big-char">Aa</div>
+        </div>
+    </section>
 
-        <div class="card">
-            <div class="card-image-area">
-                <div class="mock-content" style="border-color: var(--blue);">
-                    <div class="mock-title" style="color: var(--red);">Vanilla Sky</div>
-                    <div style="font-size: 40px; font-family: 'Titan One'; color: var(--blue);">Aa</div>
-                    <p style="font-size: 12px; color: #666;">Minimalist and playful aesthetics.</p>
-                </div>
-            </div>
-            <div class="card-info">
-                <h2>Vanilla Sky</h2>
-                <div class="price">$59.00</div>
-                <a href="#" class="buy-btn" style="background-color: var(--blue);">Add to Cart</a>
-            </div>
+    <section class="features">
+        <div class="box box-blue">
+            <h3>Outfit Sans</h3>
+            <p>Clean, geometric, and modern. Perfect for any minimalist project.</p>
         </div>
-
-        <div class="card">
-            <div class="card-image-area">
-                <div class="mock-content">
-                    <div class="mock-title">Mali</div>
-                    <div style="font-size: 40px; color: var(--pink);">Aa</div>
-                    <p style="font-size: 12px; color: #666;">A touch of elegance in every character.</p>
-                </div>
-            </div>
-            <div class="card-info">
-                <h2>Mali</h2>
-                <div class="price">$59.00</div>
-                <a href="#" class="buy-btn">Add to Cart</a>
-            </div>
+        <div class="box box-yellow">
+            <h3>Titan One</h3>
+            <p>A heavy-weight display font that makes a loud statement quietly.</p>
         </div>
-    </div>
+        <div class="box box-pink">
+            <h3>Pure CSS</h3>
+            <p>No heavy frameworks. Just clean code and bright colors.</p>
+        </div>
+    </section>
 
 </body>
 </html>
