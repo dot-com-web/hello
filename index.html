@@ -3,181 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Spectrum Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    
+    <title>Minimal Blue</title>
     <style>
-        /* --- Base & Reset --- */
+        /* --- CSS Variables for Easy Theming --- */
+        :root {
+            --primary-blue: #2563eb;  /* Bright Royal Blue */
+            --dark-blue: #1e3a8a;     /* Deep Navy Blue */
+            --light-blue: #eff6ff;    /* Very Pale Blue for borders/accents */
+            --text-main: #334155;     /* Slate for readable body text */
+            --bg-color: #ffffff;      /* Clean White background */
+        }
+
+        /* --- Reset & Base Styles --- */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        body, html {
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #040111; /* Deepest blue-black */
-            color: #d1d1f0;
-            overflow-x: hidden;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* --- Scanline Overlay Effect (CRT style) --- */
-        /* This applies a global "monitor" texture to the entire site */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.1),
-                rgba(0, 0, 0, 0.1) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 999; /* Above everything */
+        /* --- Layout & Structure --- */
+        header {
+            padding: 2rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--light-blue);
         }
 
-        /* --- Header: Retrowave Sunset/Grid --- */
-        .retro-header {
-            font-family: 'Press Start 2P', cursive;
-            position: relative;
-            height: 250px;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        main {
+            flex: 1; /* Pushes the footer to the bottom */
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
-            border-bottom: 5px solid;
-            /* Multi-color border */
-            border-image: linear-gradient(90deg, #ff00ff, #00ffff, #ffea00, #ff00ff) 1;
-            
-            /* Vaporwave/Synthwave Sunset Gradient Background */
-            background: linear-gradient(180deg, 
-                #000000 0%, 
-                #1a063d 40%, 
-                #a800ff 70%, 
-                #ff0055 85%, 
-                #ffea00 100%
-            );
-        }
-
-        /* Adding a perspective grid to the background */
-        .retro-header::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background-image:
-                linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, rgba(255, 0, 255, 0.1) 25%, rgba(255, 0, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.1) 75%, rgba(255, 0, 255, 0.1) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
-            transform: perspective(100px) rotateX(60deg);
-            z-index: 0;
-            opacity: 0.5;
-        }
-
-        .title-container {
-            position: relative;
-            z-index: 2; /* above grid */
-            margin-bottom: 30px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .neon-title {
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #fff;
-            
-            /* Multicolor Neon Text Glow */
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #ff00ff,
-                0 0 20px #ff00ff,
-                0 0 30px #00ffff,
-                0 0 40px #ffea00;
-            
-            animation: flicker 4s infinite alternate;
-        }
-
-        .pixel-logo {
-            width: 32px;
-            height: 32px;
-            background-color: #ffea00;
-            box-shadow: 0 0 10px #ffea00;
-            position: relative;
-        }
-        /* Pixel art 'space invader' using pseudo-elements */
-        .pixel-logo::before, .pixel-logo::after {
-            content: '';
-            position: absolute;
-            background-color: inherit;
-        }
-        .pixel-logo::before {
-            width: 8px; height: 8px; top: 8px; left: -8px;
-            box-shadow: 40px 0 #ffea00, 24px 8px #ffea00, 16px 8px #ffea00, 20px -8px #ffea00;
-        }
-
-        /* --- Navigation: Interactive Arcade Buttons --- */
-        .retro-nav {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .retro-nav a {
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            padding: 15px 25px;
-            color: #000;
-            font-weight: bold;
-            background: #c0c0c0; /* Gray base, old software feel */
-            border: 4px solid;
-            transition: all 0.2s ease-in-out;
-            
-            /* The 'recessed' look */
-            border-color: #ffffff #808080 #808080 #ffffff;
-            box-shadow: 2px 2px 0 #000;
-        }
-
-        /* Interactive colors: Each button glows differently */
-        .retro-nav a:nth-child(1):hover { background: #00ffff; color: #000; border-color: #00cccc; box-shadow: 0 0 15px #00ffff;}
-        .retro-nav a:nth-child(2):hover { background: #ff00ff; color: #fff; border-color: #cc00cc; box-shadow: 0 0 15px #ff00ff;}
-        .retro-nav a:nth-child(3):hover { background: #ffea00; color: #000; border-color: #cccc00; box-shadow: 0 0 15px #ffea00;}
-        .retro-nav a:nth-child(4):hover { background: #33ff33; color: #000; border-color: #22cc22; box-shadow: 0 0 15px #33ff33;}
-
-        /* 'Pressed' effect */
-        .retro-nav a:active {
-            transform: translate(2px, 2px);
-            border-color: #808080 #ffffff #ffffff #808080;
-            box-shadow: 1px 1px 0 #000;
-        }
-
-        /* --- Content Area --- */
-        .content {
+            padding: 4rem 10%;
             max-width: 900px;
-            margin: 60px auto;
-            padding: 0 20px;
-            line-height: 1.8;
-            position: relative;
+            margin: 0 auto;
         }
 
-        .content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: #ffea00;
-            font-family: 'Press Start 2
+        /* --- Typography --- */
+        h1 {
+            font-size: 4rem;
+            color: var(--dark-blue);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-main);
+            max-width: 600px;
+        }
+
+        /* --- Components --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        /* --- Responsive Design for Mobile --- */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: -1px;
+            }
+            
+            p {
+                font-size: 1.1rem;
+            }
+
+            main {
+                padding: 3rem 5%;
+            }
+
+            header {
+                padding: 1.5rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Minima.</a>
+    </header>
+
+    <main>
+        <h1>Focus on what actually matters.</h1>
+        <p>A minimal web design template utilizing a carefully selected blue color palette. Built purely with HTML and CSS, emphasizing typography, spacing, and simplicity.</p>
+        <div>
+            <a href="#" class="btn">Learn More</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Minima Theme. All rights reserved.
+    </footer>
+
+</body>
+</html>
