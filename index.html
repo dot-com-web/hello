@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro OS</title>
+    <style>
+        /* General Reset */
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: "MS Sans Serif", "Tahoma", sans-serif;
+            background-color: #008080; /* Classic Teal Desktop */
+            overflow: hidden;
+        }
+
+        /* Window Styling */
+        .window {
+            width: 400px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff; /* Bevel effect */
+            box-shadow: 1px 1px 0 0 #000;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+
+        .title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            padding: 3px 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .title-bar-controls button {
+            width: 16px;
+            height: 14px;
+            background: #c0c0c0;
+            border: 1px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            cursor: pointer;
+            margin-left: 2px;
+        }
+
+        .window-body {
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        /* Taskbar Styling */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 2px;
+            z-index: 100;
+        }
+
+        .start-button {
+            height: 22px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            background: #c0c0c0;
+            padding: 0 5px;
+            gap: 5px;
+        }
+
+        .start-button:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .active-tasks {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .task-item {
+            width: 150px;
+            height: 22px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            font-size: 12px;
+            padding-left: 5px;
+            line-height: 20px;
+        }
+
+        .system-tray {
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            padding: 0 10px;
+            font-size: 12px;
+            height: 22px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="desktop">
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-bar-text">README.txt - Notepad</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <h3>Welcome to 1995</h3>
+                <p>This interface is built with pure HTML and CSS. No time machine required.</p>
+                <hr>
+                <p>To-do list:</p>
+                <ul>
+                    <li>Install Netscape Navigator</li>
+                    <li>Listen to some MIDI files</li>
+                    <li>Wait 10 minutes for a JPEG to load</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <button class="start-button">
+            <img src="https://img.icons8.com/color/16/000000/windows-95.png" alt="win">
+            <span>Start</span>
+        </button>
+        <div class="taskbar-divider"></div>
+        <div class="active-tasks">
+            <div class="task-item">Notepad</div>
+        </div>
+        <div class="system-tray">
+            10:43 AM
+        </div>
+    </div>
+
+</body>
+</html>
